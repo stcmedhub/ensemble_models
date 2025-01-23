@@ -1,15 +1,16 @@
 
-# Deep Learning Image Classification with InceptionV3
+# Deep Learning Image Classification with InceptionV3 and EfficientNetV2B2 for Ensemble generation
 
-This repository contains code for training a deep learning model using the InceptionV3 architecture to classify images. The model is trained with advanced image augmentation techniques and evaluated using several metrics such as accuracy, AUC, precision, recall, and others.
+This repository contains code for training deep learning models using the InceptionV3 or EfficientNetV2B2 architecture to classify images. The models are trained with image augmentation techniques and evaluated using several metrics such as accuracy, AUC, precision, recall, and others.
 
 ## Overview
 
-The project uses TensorFlow 2.x (including Keras) along with several image preprocessing and augmentation techniques. It includes data generators for training and validation, model architecture for InceptionV3, and callbacks for model checkpoints and logging.
+The project uses TensorFlow 2.x (including Keras) along with several image preprocessing and augmentation techniques. It includes data generators for training and validation, model architecture for InceptionV3 and EfficientNetV2B2, and callbacks for model checkpoints and logging.
 
 ## Features
 
 - **InceptionV3 Model**: Used as the base model for image classification.
+- **EfficientNetV2B2 Model**: Used as the base model for image classification.
 - **Data Augmentation**: Advanced augmentations using the `albumentations` library.
 - **Image Preprocessing**: Custom preprocessing for input images.
 - **Metrics**: Evaluation includes binary accuracy, precision, recall, AUC, and confusion matrix metrics (True Positives, True Negatives, etc.).
@@ -19,7 +20,7 @@ The project uses TensorFlow 2.x (including Keras) along with several image prepr
 
 ### Prerequisites
 
-Make sure you have `Python` (preferably Python 3.8 or higher) and `pip` installed. Create a virtual environment and install dependencies:
+Make sure you have `Python` (preferably Python 3.8) and `pip` installed. Create a virtual environment and install dependencies:
 
 ```bash
 python3 -m venv venv
@@ -40,9 +41,8 @@ pip install -r requirements.txt
 .
 ├── README.md             # This file
 ├── requirements.txt       # Python dependencies
-├── model.py               # Model definition and training script
-├── data_preprocessing.py  # Image preprocessing and augmentation
-└── train.py               # Training script
+├── train_effinet.ipynb    # Model definition and training script
+├── train_inception.ipynb    # Model definition and training script
 ```
 
 ### Data
@@ -58,23 +58,19 @@ The directory structure should be organized as:
 
 ```
 /trainset/
-    /positive/
-    /negative/
+    /class1/
+    /class0/
 
 /valset/
-    /positive/
-    /negative/
+    /class1/
+    /class0/
 ```
 
 ### Training
 
-To train the model, simply run the `train.py` script:
+To train the model, simply run the notebooks:
 
-```bash
-python train.py
-```
-
-This will initiate training with the specified parameters, and it will save the model weights and architecture to files. You can adjust the `batch_size`, `epochs`, and other configurations as needed.
+This will initiate training with the specified parameters, and it will save the model weights and architecture to files. You can adjust parameters like `batch_size`, `epochs`, and other configurations as needed.
 
 ### Model Saving
 
@@ -90,9 +86,9 @@ During and after training, the model weights and architecture are saved to the f
 
 ## Model Architecture
 
-The architecture is based on **InceptionV3** with the following modifications:
+The architecture is based on **InceptionV3** or **EfficientNetV2B2** with the following modifications:
 
-1. **Base Model**: InceptionV3 without the top classification layers (for transfer learning).
+1. **Base Model**: InceptionV3 or EfficientNetV2B2.
 2. **Custom Top Layers**: 
    - Global Average Pooling.
    - Dropout and Dense layers for regularization and classification.
